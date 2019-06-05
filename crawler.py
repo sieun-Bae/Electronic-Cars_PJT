@@ -43,9 +43,7 @@ def main():
 	maxpage_t = (int(pageNum) - 1)*10+1
 
 	page=1
-	url1 = '' #completely raw url
-	f_url = '' #final url
-
+	
 	while page <= maxpage_t:
 		url = "https://search.naver.com/search.naver?&where=post&query="+query+"&start="+str(page)
 		response = requests.get(url)
