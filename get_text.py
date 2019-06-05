@@ -21,3 +21,10 @@ def get_text(final_url):
 
 	except:
 		print("크롤링 실패")
+
+
+def no_space(text):
+	text1 = re.sub('&nbsp; | &nbsp;| \n|\t|\r', '', text)
+	text2 = re.sub('\n\n', '', text1)
+	return text2
+
