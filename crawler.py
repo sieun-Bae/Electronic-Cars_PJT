@@ -5,6 +5,7 @@ from datetime import datetime
 import requests
 import pandas as pd
 import re
+import time
 
 RESULT_PATH = '/Users/baesieun/baesieun/Python_Programming/Final_Project/'
 now = datetime.now()
@@ -24,7 +25,7 @@ def main():
 
 	crawler(pageNum, query, sort, s_date, e_date)
 
-def contents(news_urls):
+def content(news_urls):
 	'''
 	for url in urls:
 		response = requests.get(url)
@@ -39,10 +40,11 @@ def contents(news_urls):
 	'''
 	for i in range(len(news_urls)):
 			response = requests.get(news_urls[i])
+			time.sleep(3)
 			htmls = response.text
 
 			soup = BeautifulSoup(htmls, 'html.parser')
-			c = soup.select('article_content > br').text
+			c = soup.select('.container > br')
 			contents.append(c)
 		
 
@@ -78,16 +80,17 @@ def crawler(pageNum, query, sort, s_date, e_date):
 			print(tag)
 			news_urls.append(tag.get('href'))
 		
-		contents(news_urls)
+		content(news_urls)
 		contents_cleansing(contents)
 		
+		print(contents)
 		#result = { "date": date_text, "title": title_text, "contents": contents_text }
 		#print(page)
 		
 		#df = pd.DataFrame(result)
 		page += 10
 		#print(contents_text)
-		'''
+	'''
 	outputFileName = '%s-%s-%s %s시 %s분 %s초 result.xlsx' % (now.year, now.month, now.day, now.hour, now.minute, now.second)
 	df.to_excel(RESULT_PATH+outputFileName,sheet_name='sheet1')
 	'''
