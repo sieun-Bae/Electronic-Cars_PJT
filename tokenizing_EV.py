@@ -3,13 +3,10 @@ import numpy as np
 
 import nltk
 from nltk.tokenize import sent_tokenize, word_tokenize
-from konlpy.tag import Kkma
-from konlpy.utils import pprint
-
 titles = []
 contents = []
 
-raw_data = pd.read_excel('2019-6-6  2시 51분 29초 merging.xlsx', 'sheet1')
+raw_data = pd.read_excel('raw_data.xlsx', 'sheet1')
 raw_titles = raw_data['title']
 raw_contents = raw_data['contents']
 
@@ -20,8 +17,8 @@ for i in range(len(raw_data)):
 
 #tokenize
 docs = [] #store all the tokens of titles and contents
-'''
-for i in range(0, len(titles)):
+
+for i in range(0, len(raw_data)):
 	title = titles[i]
 	content = contents[i]
 	title_tokens = word_tokenize(title)
@@ -34,8 +31,8 @@ for i in range(0, len(titles)):
 '''
 for i in range(0, len(raw_data)):
 	titles.append(kkma.nouns(uraw_titles[i]))
-
+'''
 nltk_text = nltk.Text(docs)
 freq_dist = nltk_text.vocab()
-print(titles)
 print(freq_dist['활성화'])
+
